@@ -1,3 +1,5 @@
 scikit-optimize
 scikit-learn
 datasets
+pandas
+pickle
