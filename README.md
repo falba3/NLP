@@ -31,5 +31,5 @@ be found in this Colab Notebook link.
   * https://colab.research.google.com/drive/1rmpWX95Onf1C_HjHN9Dy2ez3IWO_Mcny?usp=sharing
 
 ## Testing
-* cd francisco_alba_individual_project
+* cd francisco_alba_individual_project/classical_ml
 * python3 main.py
