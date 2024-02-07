@@ -25,7 +25,6 @@ was faster to fit and test and so my final model does just this.
 * Final f1 Score on Test Set: 81.64%
 
 ## Notes
-* I included a video of my final sample test run before submitting this directory. (working_demo_test.mov)
 * I included two models that I saved of succesful logistic regression model runs.
 * My original workspace where I tested multiple models and data enrichments can 
 be found in this Colab Notebook link.
