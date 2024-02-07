@@ -1,0 +1,11 @@
+tfidf_lr_80
+- Bayes Search of a logistic regression
+- TFIDF vectorizer
+- with preprocessor
+- trained on 38k (added IMDB train set)
+
+tfidf_lr_81
+- Single fit of default logistic regression
+- TFIDF vectorizer
+- no preprocessor
+- trained on 38k (added IMDB train set)

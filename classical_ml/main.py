@@ -69,7 +69,7 @@ def main():
 
     # Getting and printing the f1 score
     score = get_score_from_model(tfidf_lr)
-    print(score)
+    print(f"f1 score: {score}")
 
     # Getting predictions and saving into a csv
     preds = make_preds(fitted_model=tfidf_lr)
