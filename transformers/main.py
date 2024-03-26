@@ -74,7 +74,7 @@ def main():
 
     # Evaluating our results on the test
     results = trainer.evaluate(tokenized_dataset["test"])
-    print(results['eval_f1'])
+    print(f"f1 score: {round(results['eval_f1'], 4)}")
 
 
 if __name__ == "__main__":
