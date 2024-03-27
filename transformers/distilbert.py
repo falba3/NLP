@@ -13,9 +13,9 @@ class CustomEarlyStoppingCallback(TrainerCallback):
     """
     Stopping Callback that will stop training based on f1 metric
     default patience: 3 epochs
-    default delta: 0.05 increase in f1
+    default delta: 0.005 increase in f1
     """
-    def __init__(self, delta=0.001, patience=2, metric_name="eval_f1"):
+    def __init__(self, delta=0.005, patience=2, metric_name="eval_f1"):
         self.delta = delta
         self.patience = patience
         self.metric_name = metric_name
