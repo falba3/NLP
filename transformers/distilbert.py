@@ -6,7 +6,6 @@ import torch
 from itertools import product #
 
 
-torch.manual_seed(0) # to replicate results
 dataset = load_dataset('rotten_tomatoes')
 
 # Customized Stopping Callback
@@ -114,6 +113,7 @@ def main():
             )
 
             # Train the model
+            torch.manual_seed(0)  # to replicate results
             trainer.train()
 
             # Evaluate the model on validation set
