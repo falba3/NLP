@@ -131,7 +131,7 @@ def main():
 
         # Evaluate the model on the test set using the best parameters
         test_results = best_trainer.evaluate(tokenized_dataset["test"])
-        print(f"f1 test score: {round(test_results, 4)}\nbest parameters: {best_params}")
+        print(f"f1 test score: {round(test_results['eval_f1'], 4)}\nbest parameters: {best_params}")
 
         # return best_params, best_score, test_results
 
