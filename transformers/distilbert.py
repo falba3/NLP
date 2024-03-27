@@ -126,15 +126,10 @@ def main():
                 best_params = params
                 best_trainer = trainer
 
-        # # Set the best parameters to the trainer
-        # for param_name, param_value in zip(parameter_grid.keys(), best_params):
-        #     setattr(trainer.args, param_name, param_value)
-
         # Evaluate the model on the test set using the best parameters
         test_results = best_trainer.evaluate(tokenized_dataset["test"])
         print(f"f1 test score: {round(test_results['eval_f1'], 4)}\nbest parameters: {best_params}")
-
-        # return best_params, best_score, test_results
+        return best_trainer
 
     # results = trainer.evaluate(tokenized_dataset["test"])
     # print(f"f1 score: {round(results['eval_f1'], 4)}")
