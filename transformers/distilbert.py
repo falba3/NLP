@@ -100,8 +100,8 @@ def main():
 
         for params in param_combinations:
             # Initialize a new Trainer object with the given parameters
-            print(f"TRAINING PARAMETERS: {params}")
-            param_dict = {key: value for key, value in zip(parameter_grid.keys(), params)} #
+            param_dict = {key: value for key, value in zip(parameter_grid.keys(), params)}  #
+            print(f"TRAINING PARAMETERS: {param_dict}")
             args = TrainingArguments(**param_dict) #
             trainer = Trainer(
                 model=model,
