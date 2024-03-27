@@ -1,7 +1,0 @@
-datasets
-accelerate
-evaluate
-transformers
-numpy
-scikit-learn
-nltk

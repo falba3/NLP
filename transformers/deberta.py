@@ -45,7 +45,7 @@ def main():
     """
 
     # Defining model checkpoint and batch size
-    model_checkpoint = "deberta-v3-base"
+    model_checkpoint = "microsoft/deberta-v3-base"
 
     # loading the tokenizer
     tokenizer = AutoTokenizer.from_pretrained(model_checkpoint)
