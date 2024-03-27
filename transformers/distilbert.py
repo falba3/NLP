@@ -12,7 +12,7 @@ dataset = load_dataset('rotten_tomatoes')
 class CustomEarlyStoppingCallback(TrainerCallback):
     """
     Stopping Callback that will stop training based on f1 metric
-    default patience: 3 epochs
+    default patience: 2 epochs
     default delta: 0.005 increase in f1
     """
     def __init__(self, delta=0.005, patience=2, metric_name="eval_f1"):
@@ -88,7 +88,7 @@ def main():
         return {"f1": res}
 
     # Instantiating the custom early stopping callback
-    custom_early_stopping = CustomEarlyStoppingCallback(delta=0.01, patience=2, metric_name="f1")
+    custom_early_stopping = CustomEarlyStoppingCallback(delta=0.005, patience=2, metric_name="f1")
 
     def tuner(parameter_grid):
         best_score = 0
@@ -100,7 +100,7 @@ def main():
 
         for params in param_combinations:
             # Initialize a new Trainer object with the given parameters
-            param_dict = {key: value for key, value in zip(parameter_grid.keys(), params)}  #
+            param_dict = {key: value for key, value in zip(parameter_grid.keys(), params)}
             print(f"TRAINING PARAMETERS: {param_dict}")
             args = TrainingArguments(**param_dict) #
             trainer = Trainer(
@@ -126,15 +126,17 @@ def main():
                 best_params = params
                 best_trainer = trainer
 
-        # Evaluate the model on the test set using the best parameters
-        test_results = best_trainer.evaluate(tokenized_dataset["test"])
-        print(f"f1 test score: {round(test_results['eval_f1'], 4)}\nbest parameters: {best_params}")
-        return best_trainer
+        return best_trainer, best_params
+
+    # Evaluate the model on the test set using the best parameters
+    best_trainer, best_params = tuner(parameter_grid=param_grid)
+    test_results = best_trainer.evaluate(tokenized_dataset["test"])
+    print(f"f1 test score: {round(test_results['eval_f1'], 4)}\nbest parameters: {best_params}")
 
     # results = trainer.evaluate(tokenized_dataset["test"])
     # print(f"f1 score: {round(results['eval_f1'], 4)}")
 
-    tuner(parameter_grid=param_grid)
+
 
 
 if __name__ == "__main__":
