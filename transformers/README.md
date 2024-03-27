@@ -18,11 +18,11 @@ the best evaluation f1 score.
 * *Test f1 score: 0.8386*
 
 ## deBERTa
-* epochs: 1
+* epochs: 5
 * learning_rate: 1e-05
 * batch_size: 16
 * weight_decay: 0.01
-* *Test f1 score: 0.9118*
+* *Test f1 score: 0.9137*
 
 
 ## Conclusions
@@ -33,4 +33,4 @@ the best evaluation f1 score.
   2. batch_size:  
   3. epochs: 
   4. weight_decat:
-* Test f1 score: 0.9118
+* Test f1 score: 0.9137
