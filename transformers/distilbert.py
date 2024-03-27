@@ -8,6 +8,7 @@ from itertools import product
 
 dataset = load_dataset('rotten_tomatoes')
 
+
 # Customized Stopping Callback
 class CustomEarlyStoppingCallback(TrainerCallback):
     """
@@ -15,7 +16,13 @@ class CustomEarlyStoppingCallback(TrainerCallback):
     default patience: 2 epochs
     default delta: 0.005 increase in f1
     """
+
     def __init__(self, delta=0.005, patience=2, metric_name="f1"):
+        """
+        :param delta: how much score has to increase to continue training
+        :param patience: how many epochs can pass without going over defined delta
+        :param metric_name: metric to track
+        """
         self.delta = delta
         self.patience = patience
         self.metric_name = metric_name
@@ -23,6 +30,18 @@ class CustomEarlyStoppingCallback(TrainerCallback):
         self.wait = 0
 
     def on_evaluate(self, args, state, control, **kwargs):
+        """
+        This method is responsible for determining whether to stop training based on the evaluation metric specified.
+        It compares the current metric value with the best metric value observed so far, and if the difference exceeds
+        the defined delta and patience has been reached, it sets `control.should_training_stop` to True, indicating that
+        training should be stopped.
+
+        If the specified metric is not found in the evaluation results, a warning message is printed.
+        :param args: The arguments passed to the Trainer
+        :param state: The current state of the Trainer
+        :param control: Control flow manager for the Trainer.
+        :param kwargs: Additional keyword arguments that may be passed.
+        """
         if self.metric_name in state.log_history[-1]:
             current_metric = state.log_history[-1][self.metric_name]
             if self.best_metric is None:
@@ -55,7 +74,13 @@ def main():
 
     # Tokenizing our sentences
     def preprocess_function(samples):
+        """
+        This function will tokenize the dataset.
+        :param samples: sentences containing text to be tokenized
+        :return: succesfully tokenized samples
+        """
         return tokenizer(samples["text"], padding="longest", truncation=True)
+
     tokenized_dataset = dataset.map(preprocess_function, batched=True, num_proc=2)
 
     # Model Setup (Configuration and Labels)
@@ -81,6 +106,11 @@ def main():
 
     # Function for computing macro f1 metric
     def compute_metrics(pred):
+        """
+        This function will compute the macro f1 score given model predictions
+        :param pred: predictions computed by a model
+        :return: dictionary of f1 key and corresponding score
+        """
         predictions, labels = pred
         predictions = np.argmax(predictions, axis=1)
 
@@ -91,6 +121,11 @@ def main():
     custom_early_stopping = CustomEarlyStoppingCallback(delta=0.005, patience=2, metric_name="f1")
 
     def tuner(parameter_grid):
+        """
+        This function will tune the model based on a parameter grid and return the best trainer and parameters
+        :param parameter_grid: dictionary of parameter combinations to tune
+        :return: best trainer and best parameters among the combinations tested
+        """
         best_score = 0
         best_params = None
         best_trainer = None
@@ -132,11 +167,6 @@ def main():
     best_trainer, best_params = tuner(parameter_grid=param_grid)
     test_results = best_trainer.evaluate(tokenized_dataset["test"])
     print(f"f1 test score: {round(test_results['eval_f1'], 4)}\nbest parameters: {best_params}")
-
-    # results = trainer.evaluate(tokenized_dataset["test"])
-    # print(f"f1 score: {round(results['eval_f1'], 4)}")
-
-
 
 
 if __name__ == "__main__":
