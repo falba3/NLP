@@ -88,7 +88,7 @@ def main():
         return {"f1": res}
 
     # Instantiating the custom early stopping callback
-    custom_early_stopping = CustomEarlyStoppingCallback(delta=0.01, patience=3, metric_name="f1")
+    custom_early_stopping = CustomEarlyStoppingCallback(delta=0.01, patience=2, metric_name="f1")
 
     def tuner(parameter_grid):
         best_score = 0
