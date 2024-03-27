@@ -2,9 +2,10 @@ from datasets import load_dataset
 from transformers import AutoTokenizer, AutoConfig, AutoModelForSequenceClassification, TrainingArguments, Trainer, EarlyStoppingCallback
 from sklearn.metrics import f1_score
 import numpy as np
+import torch
 import evaluate
 
-
+torch.seed(0) # to replicate results
 dataset = load_dataset('rotten_tomatoes')
 
 
