@@ -5,7 +5,7 @@ import numpy as np
 import torch
 # import evaluate
 
-torch.seed(0) # to replicate results
+torch.manual_seed(0) # to replicate results
 dataset = load_dataset('rotten_tomatoes')
 
 
