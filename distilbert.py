@@ -1,5 +1,5 @@
 from datasets import load_dataset
-from transformers import AutoTokenizer, AutoConfig, AutoModelForSequenceClassification, TrainingArguments, Trainer, EarlyStoppingCallback
+from transformers import AutoTokenizer, AutoConfig, AutoModelForSequenceClassification, TrainingArguments, Trainer, TrainerCallback
 from sklearn.metrics import f1_score
 import numpy as np
 import torch
@@ -7,6 +7,34 @@ import torch
 
 torch.manual_seed(0) # to replicate results
 dataset = load_dataset('rotten_tomatoes')
+
+# Customized Stopping Callback
+class CustomEarlyStoppingCallback(TrainerCallback):
+    """
+    Stopping Callback that will stop training based on f1 metric
+    default patience: 3 epochs
+    default delta: 0.01 increase  in f1
+    """
+    def __init__(self, delta=0.01, patience=3, metric_name="f1"):
+        self.delta = delta
+        self.patience = patience
+        self.metric_name = metric_name
+        self.best_metric = None
+        self.wait = 0
+
+    def on_evaluate(self, args, state, control, **kwargs):
+        current_metric = state.metrics.get(self.metric_name)
+        if current_metric is None:
+            return
+        if self.best_metric is None:
+            self.best_metric = current_metric
+        elif current_metric - self.best_metric > self.delta:
+            self.best_metric = current_metric
+            self.wait = 0
+        else:
+            self.wait += 1
+            if self.wait >= self.patience:
+                control.should_training_stop = True
 
 
 def main():
@@ -60,6 +88,8 @@ def main():
         return {"f1": res}
 
     # Creating the trainer to fine-tune our model over our data
+    custom_early_stopping = CustomEarlyStoppingCallback(delta=0.01, patience=3, metric_name="f1")
+
     trainer = Trainer(
         model,
         args,
@@ -67,7 +97,7 @@ def main():
         eval_dataset=tokenized_dataset["validation"],
         tokenizer=tokenizer,
         compute_metrics=compute_metrics,
-        callbacks=[EarlyStoppingCallback()]
+        callbacks=[custom_early_stopping]
     )
 
     # Training the trainer
