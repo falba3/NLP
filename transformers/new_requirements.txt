@@ -1,0 +1,5 @@
+datasets
+accelerate
+transformers
+numpy
+scikit-learn
