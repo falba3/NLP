@@ -15,8 +15,7 @@ def main():
     """
 
     # Defining model checkpoint and batch size
-    model_checkpoint = "distilbert-base-uncased"
-    batch_size = 16
+    model_checkpoint = "microsoft/deberta-v3-base"
 
     # loading the tokenizer
     tokenizer = AutoTokenizer.from_pretrained(model_checkpoint)
@@ -37,13 +36,13 @@ def main():
 
     # Training Arguments (to tune)
     args = TrainingArguments(
-        "distilbert-rottentomatoes",  # name for the model (a directory is created with this name)
+        output_dir="distilbert-rottentomatoes",  # name for the model (a directory is created with this name)
         evaluation_strategy="epoch",  # we evaluate and save every epoch
         report_to="none",  # don't report to tensorboard or wandb
         save_strategy="epoch",
         learning_rate=2e-5,  # learning rate to use in Adam Optimizer.
-        per_device_train_batch_size=batch_size,  # size of the batch for forward pass.
-        per_device_eval_batch_size=batch_size,  # "" for eval.
+        per_device_train_batch_size=16,  # size of the batch for forward pass.
+        per_device_eval_batch_size=16,  # "" for eval.
         num_train_epochs=5,  # total number of training epochs
         weight_decay=0.01,  # parameter for adam optimizer
         load_best_model_at_end=True, # whether to load the best performing model at the end (best checkpoint, at the best performing moment in training.)
