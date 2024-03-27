@@ -3,7 +3,7 @@ from transformers import AutoTokenizer, AutoConfig, AutoModelForSequenceClassifi
 from sklearn.metrics import f1_score
 import numpy as np
 import torch
-from itertools import product #
+from itertools import product
 
 
 dataset = load_dataset('rotten_tomatoes')
