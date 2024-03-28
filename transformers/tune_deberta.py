@@ -90,11 +90,11 @@ def main():
         "report_to": ["none"],
         "evaluation_strategy": ["epoch"],
         "save_strategy": ["epoch"],
-        "learning_rate": [1e-5],
+        "learning_rate": [1e-5, 2e-5],
         "per_device_train_batch_size": [16],
         "per_device_eval_batch_size": [16],
         "num_train_epochs": [5],
-        "weight_decay": [0.01],
+        "weight_decay": [0.01, 0.001],
         # "fp16": [True, False],
         "load_best_model_at_end": [True],
         "metric_for_best_model": ["f1"]

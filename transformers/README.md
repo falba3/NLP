@@ -22,7 +22,7 @@ the best evaluation f1 score.
 * learning_rate: 1e-05
 * batch_size: 16
 * weight_decay: 0.01
-* *Test f1 score: 0.9137*
+* *Test f1 score: 0.9165*
 
 ## roBERTa
 * epochs: 5
