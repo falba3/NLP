@@ -15,7 +15,7 @@ the best evaluation f1 score.
 * learning_rate: 1e-05
 * batch_size: 16
 * weight_decay: 0.01
-* *Test f1 score: 0.8386*
+* *Test f1 score: 0.8433*
 
 ## deBERTa
 * epochs: 5
@@ -24,6 +24,12 @@ the best evaluation f1 score.
 * weight_decay: 0.01
 * *Test f1 score: 0.9137*
 
+## roBERTa
+* epochs: 5
+* learning_rate: 1e-05
+* batch_size: 16
+* weight_decay: 0.01
+* *Test f1 score: 0.8874*
 
 ## Conclusions
 * After tuning multiple models, the best turned out to be ____

@@ -86,7 +86,7 @@ def main():
     model = AutoModelForSequenceClassification.from_pretrained(model_checkpoint, config=config)
 
     param_grid = {
-        "output_dir": ["distilbert-rottentomatoes"],
+        "output_dir": ["deberta-rottentomatoes"],
         "report_to": ["none"],
         "evaluation_strategy": ["epoch"],
         "save_strategy": ["epoch"],
