@@ -3,3 +3,4 @@ accelerate
 transformers
 numpy
 scikit-learn
+pandas

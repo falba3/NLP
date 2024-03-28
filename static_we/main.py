@@ -76,9 +76,10 @@ def evaluate_model(model, X_test, y_test):
 
 def create_preds(model, X_test):
     """
-    :param model: the neural network model that will create predictions
-    :param X_test: a tensor of the set of embedding indices for reviews in the test set to predict from
-    :return: pandas DataFrame of the predictions with index column
+    This function returns a pandas DataFrame of the predictions.
+    :param model: the neural network model that will create predictions.
+    :param X_test: a tensor of the set of embedding indices for reviews in the test set to predict from.
+    :return: pandas DataFrame of the predictions with index column.
     """
     model.eval()
     with torch.no_grad():

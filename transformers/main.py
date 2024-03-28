@@ -2,6 +2,7 @@ from datasets import load_dataset
 from transformers import AutoTokenizer, AutoConfig, AutoModelForSequenceClassification, TrainingArguments, Trainer, EarlyStoppingCallback
 from sklearn.metrics import f1_score
 import numpy as np
+import pandas as pd
 import torch
 
 
@@ -87,6 +88,26 @@ def main():
     # Evaluating our results on the test
     results = trainer.evaluate(tokenized_dataset["test"])
     print(f"f1 test score: {round(results['eval_f1'], 4)}")
+
+    # Making predictions on new data
+    def create_preds(trainer, test_set):
+        """
+        This function returns a pandas DataFrame of the predictions.
+        :param trainer: the trainer of the fine-tuned model that will create predictions.
+        :param test_set: a tensor of the set of embedding indices for reviews in the test set to predict from.
+        :return: pandas DataFrame of the predictions with index column.
+        """
+        test_predictions = trainer.predict(test_set)
+        test_pred_labels = np.argmax(test_predictions.predictions, axis=1)
+        predictions = test_pred_labels.squeeze()
+
+        pred_df = pd.DataFrame({'pred': predictions})
+        index_df = pd.DataFrame(list(range(0, len(predictions))), columns=['index'])
+        pred_df = pd.concat([index_df, pred_df], axis=1)
+        return pred_df
+
+    out = create_preds(trainer, tokenized_dataset["test"])
+    out.to_csv('results.csv')
 
 
 if __name__ == "__main__":
