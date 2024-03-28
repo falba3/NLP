@@ -89,7 +89,7 @@ def main():
     results = trainer.evaluate(tokenized_dataset["test"])
     print(f"f1 test score: {round(results['eval_f1'], 4)}")
 
-    # Making predictions on new data
+    # Making predictions on test set
     def create_preds(trainer, test_set):
         """
         This function returns a pandas DataFrame of the predictions.
