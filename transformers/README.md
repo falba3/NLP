@@ -32,11 +32,11 @@ the best evaluation f1 score.
 * *Test f1 score: 0.8874*
 
 ## Conclusions
-* After tuning multiple models, the best turned out to be ____
-* In this main script, I am training ____ with the following parameters.
-* Optimized Parameters:
-  1. learning_rate: 
-  2. batch_size:  
-  3. epochs: 
-  4. weight_decat:
+* After tuning multiple models, the best turned out to be deBERTa. 
+* In this main script, I am training deBERTa with the following parameters.
+* **Optimized Parameters**
+  1. learning_rate: 1e-05
+  2. batch_size: 16 
+  3. epochs: 5
+  4. weight_decat: 0.01
 * Test f1 score: 0.9137
