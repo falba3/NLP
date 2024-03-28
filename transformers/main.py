@@ -11,7 +11,8 @@ dataset = load_dataset('rotten_tomatoes')
 
 def main():
     """
-    DOCSTRING
+    This main function will use the 'deberta-base-uncased' model checkpoint
+    to train on the rotten tomatoes dataset.
     """
 
     # Defining model checkpoint and batch size
@@ -25,7 +26,13 @@ def main():
 
     # Tokenizing our sentences
     def preprocess_function(samples):
+        """
+        This function will tokenize the dataset.
+        :param samples: sentences containing text to be tokenized
+        :return: succesfully tokenized samples
+        """
         return tokenizer(samples["text"], padding="longest", truncation=True)
+
     tokenized_dataset = dataset.map(preprocess_function, batched=True, num_proc=2)
 
     # Model Setup (Configuration and Labels)
@@ -36,11 +43,11 @@ def main():
 
     # Training Arguments (to tune)
     args = TrainingArguments(
-        output_dir="distilbert-rottentomatoes",  # name for the model (a directory is created with this name)
+        output_dir="deberta-rottentomatoes",  # name for the model (a directory is created with this name)
         evaluation_strategy="epoch",  # we evaluate and save every epoch
         report_to="none",  # don't report to tensorboard or wandb
         save_strategy="epoch",
-        learning_rate=2e-5,  # learning rate to use in Adam Optimizer.
+        learning_rate=1e-5,  # learning rate to use in Adam Optimizer. # 2e-5 was a mistake but got the best score
         per_device_train_batch_size=16,  # size of the batch for forward pass.
         per_device_eval_batch_size=16,  # "" for eval.
         num_train_epochs=5,  # total number of training epochs
@@ -50,8 +57,13 @@ def main():
         # fp16=True # for mixed precision (lower memory usage)
     )
 
-    # Computing Metrics
+    # Function for computing macro f1 metric
     def compute_metrics(pred):
+        """
+        This function will compute the macro f1 score given model predictions
+        :param pred: predictions computed by a model
+        :return: dictionary of f1 key and corresponding score
+        """
         predictions, labels = pred
         predictions = np.argmax(predictions, axis=1)
 
@@ -74,7 +86,7 @@ def main():
 
     # Evaluating our results on the test
     results = trainer.evaluate(tokenized_dataset["test"])
-    print(f"f1 score: {round(results['eval_f1'], 4)}")
+    print(f"f1 test score: {round(results['eval_f1'], 4)}")
 
 
 if __name__ == "__main__":
