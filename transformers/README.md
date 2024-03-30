@@ -19,10 +19,10 @@ the best evaluation f1 score.
 
 ## deBERTa
 * epochs: 5
-* learning_rate: 1e-05
+* learning_rate: 2e-05
 * batch_size: 16
 * weight_decay: 0.01
-* *Test f1 score: 0.9165*
+* *Test f1 score: 0.9128*
 
 ## roBERTa
 * epochs: 5
@@ -35,7 +35,7 @@ the best evaluation f1 score.
 * After tuning multiple models, the best turned out to be deBERTa. 
 * In this main script, I am training deBERTa with the following parameters.
 * **Optimized Parameters**
-  1. learning_rate: 1e-05
+  1. learning_rate: 2e-05
   2. batch_size: 16 
   3. epochs: 5
   4. weight_decat: 0.01
