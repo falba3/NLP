@@ -21,10 +21,10 @@ the best evaluation f1 score.
 ## roBERTa:
 * **Optimal Parameters:**
   * epochs: 5
-  * learning_rate: 1e-05
+  * learning_rate: 2e-05
   * batch_size: 16
   * weight_decay: 0.01
-* *Test f1 score: 0.8874*
+* *Test f1 score: 0.878*
 
 ## deBERTa:
 * **Optimal Parameters:**
