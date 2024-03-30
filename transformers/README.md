@@ -10,7 +10,7 @@ each parameter combination until finally saving the combination with
 the best evaluation f1 score.
 * [Parameter Tuning Colab Notebook](https://colab.research.google.com/drive/1vtNBEbhre3c0S_qnfLrE6SJ96LSM6jkd?usp=sharing)
 
-## DistilBERT:
+## distilBERT:
 * **Optimal Parameters:**
   * epochs: 5
   * learning_rate: 1e-05
