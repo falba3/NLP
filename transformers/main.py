@@ -48,7 +48,7 @@ def main():
         evaluation_strategy="epoch",  # we evaluate and save every epoch
         report_to="none",  # don't report to tensorboard or wandb
         save_strategy="epoch",
-        learning_rate=2e-5,  # learning rate to use in Adam Optimizer. #  was a mistake but got the best score
+        learning_rate=2e-5,  # learning rate to use in Adam Optimizer. #
         per_device_train_batch_size=16,  # size of the batch for forward pass.
         per_device_eval_batch_size=16,  # "" for eval.
         num_train_epochs=5,  # total number of training epochs
