@@ -8,7 +8,7 @@ to the rotten tomatoes dataset.
 * I created a function that receives a parameter grid and then trains 
 each parameter combination until finally saving the combination with 
 the best evaluation f1 score.
-* [Parameter Tuning Colab Notebook](https://colab.research.google.com/drive/1YH_ob8S7ImbcLnSBWfye_a8P0uiBsRE1?authuser=6#scrollTo=_sdqnDO8XFFP)
+* [Parameter Tuning Colab Notebook](https://colab.research.google.com/drive/1YH_ob8S7ImbcLnSBWfye_a8P0uiBsRE1?usp=sharing)
 
 ## distilBERT:
 * **Optimized Parameters:**
